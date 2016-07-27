@@ -1,9 +1,18 @@
 import spacy
 import random
 
-from spunkbot import diagnose
+
+""" run it with `$ python reviewbot.py` """
+
 adj_list = ["love", "hate", "kinda like", "really like", "really don't like", "sorta like", "am indifferent to"]
 en_nlp = spacy.load('en')
+
+
+def diagnose(doc):
+	""" Takes a document from spaCy and print out the tokens within it. """
+	for t in doc:
+		print t.dep_ + ", " + t.pos_ + "/" + t.tag_  + ": " + t.lower_
+
 
 def review(tweet):
 	doc = en_nlp(tweet)
@@ -25,7 +34,6 @@ def reviewer(span):
 
 
 def main():
-
 	tweet = unicode(raw_input("what's up yo?\n"))
 	print review(tweet)
 	main()
